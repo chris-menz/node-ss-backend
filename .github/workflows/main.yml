@@ -24,10 +24,10 @@ jobs:
     steps:
       - name: Checkout main
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - name: Deploy to DigitalOcean dev server
-      - uses: appleboy/ssh-action@master
-      - with: 
+        uses: appleboy/ssh-action@master
+        with: 
           host: $({secrets.SSH_HOST})
           username: $({secrets.SSH_USERNAME})
           key: $({secrets.SSH_KEY})
