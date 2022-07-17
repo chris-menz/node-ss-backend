@@ -28,9 +28,9 @@ jobs:
       - name: Deploy to DigitalOcean dev server
         uses: appleboy/ssh-action@master
         with: 
-          host: $({secrets.SSH_HOST})
+          host: "165.227.125.165"
           port: "8080"
-          username: $({secrets.SSH_USERNAME})
+          username: "dev"
           key: $({secrets.SSH_KEY})
           script: |
             whoami
