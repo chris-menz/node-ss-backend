@@ -22,14 +22,16 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Deploy to SwellStatus dev server
+      - name: Checkout main
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
+      - name: Deploy to DigitalOcean dev server
+      - uses: appleboy/ssh-action@master
       - with: 
           host: $({secrets.SSH_HOST})
           username: $({secrets.SSH_USERNAME})
           key: $({secrets.SSH_KEY})
-          run: |
+          script: |
 
-            npm i
-            node index.ts
+            ls
