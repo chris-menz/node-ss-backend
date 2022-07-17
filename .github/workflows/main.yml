@@ -29,7 +29,6 @@ jobs:
         uses: appleboy/ssh-action@master
         with: 
           host: "165.227.125.165"
-          port: "8080"
           username: "dev"
           key: "-----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
