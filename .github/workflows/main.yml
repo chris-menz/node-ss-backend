@@ -25,7 +25,6 @@ jobs:
       - name: Checkout main
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
       - name: Deploy to DigitalOcean dev server
       - uses: appleboy/ssh-action@master
       - with: 
@@ -33,5 +32,5 @@ jobs:
           username: $({secrets.SSH_USERNAME})
           key: $({secrets.SSH_KEY})
           script: |
-
-            ls
+            whoami
+            ls -la
