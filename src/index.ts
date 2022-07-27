@@ -14,7 +14,7 @@ app.get("/", async (req: Request, res: Response) => {
     res.send("hello")
 })
 
-app.use("/weather", weatherRoute)
+app.use("weather", weatherRoute)
 
 const server = app.listen(port, () => {
     console.log("Express listening on port " + port)
