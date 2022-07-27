@@ -1,8 +1,7 @@
 import express, { Express, Request, Response } from "express"
 import cookieParser from "cookie-parser"
 import cors from "cors"
-import { getBuoy } from "./modules/buoy/buoy"
-import { BuoyData } from "buoy-kit"
+import weatherRoute from "./modules/weather/weather.route"
 
 const app: Express = express()
 const port = 3003
@@ -12,9 +11,10 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.get("/", async (req: Request, res: Response) => {
-    const buoyData: BuoyData = await getBuoy("44097")
-    res.send(buoyData)
+    res.send("hello")
 })
+
+app.use("/weather", weatherRoute)
 
 const server = app.listen(port, () => {
     console.log("Express listening on port " + port)
