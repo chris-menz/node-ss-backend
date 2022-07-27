@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { VisualCrossingWeather, CurrentConditions, Weather } from "./weather.model"
+import { VisualCrossingWeather, CurrentConditions, Weather } from "./weather.model.js"
 import axios from "axios"
 
 export async function getWeather(latlng: string) {

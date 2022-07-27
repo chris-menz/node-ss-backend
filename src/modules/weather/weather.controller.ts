@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { getWeather } from "./weather.service"
-import { Weather } from "./weather.model";
+import { getWeather } from "./weather.service.js"
+import { Weather } from "./weather.model.js";
 
 export async function getWeatherHandler(req: Request, res: Response){
     const {latlng} = req.params

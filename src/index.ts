@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express"
 import cookieParser from "cookie-parser"
 import cors from "cors"
-import weatherRoute from "./modules/weather/weather.route"
+import weatherRoute from "./modules/weather/weather.route.js"
 
 const app: Express = express()
 const port = 3003

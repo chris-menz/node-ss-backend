@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { StatusCodes } from "http-status-codes";
-import { getWeather } from "./weather.service";
+import { getWeather } from "./weather.service.js";
 export function getWeatherHandler(req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var latlng, weather;

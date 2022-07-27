@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import WeatherRoutes from "./modules/weather/weather.route";
+import weatherRoute from "./modules/weather/weather.route.js";
 var app = express();
 var port = 3003;
 app.use(cors());
@@ -49,7 +49,7 @@ app.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, func
         return [2 /*return*/];
     });
 }); });
-app.use("/weather", WeatherRoutes);
+app.use("/weather", weatherRoute);
 var server = app.listen(port, function () {
     console.log("Express listening on port " + port);
 });
