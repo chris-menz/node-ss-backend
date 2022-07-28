@@ -34,36 +34,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import express from "express";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import weatherRoute from "./modules/weather/weather.route.js";
-import buoyRoute from "./modules/buoy/buoy.route.js";
-var app = express();
-var port = 3003;
-app.use(cors());
-app.use(express.json());
-app.use(cookieParser());
-app.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        res.send("hello");
-        return [2 /*return*/];
+import axios from "axios";
+import txtToJson from "txt-file-to-json";
+export function getBuoyData(buoyId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, axios.get("https://www.ndbc.noaa.gov/data/realtime2/".concat(buoyId, ".spec"))
+                    // extract most current data from response array (0 index is table headers)
+                    // const buoyData: BuoyData = txtToJson({data: response.data})[1]
+                    // const parsedBuoyData: ParsedBuoyData = {
+                    //     timestamp: parseDateIntoTimestamp(buoyData["#YY"], buoyData.MM, buoyData.DD, buoyData.hh, buoyData.mm),
+                    //     swellHeight: buoyData.SwH,
+                    //     swellPeriod: buoyData.SwP,
+                    //     swellDirection: buoyData.SwD,
+                    //     windWaveHeight: buoyData.WWH,
+                    //     windWavePeriod: buoyData.WWP,
+                    //     windWaveDirection: buoyData.WWD
+                    // }
+                    // return parsedBuoyData
+                ];
+                case 1:
+                    response = _a.sent();
+                    // extract most current data from response array (0 index is table headers)
+                    // const buoyData: BuoyData = txtToJson({data: response.data})[1]
+                    // const parsedBuoyData: ParsedBuoyData = {
+                    //     timestamp: parseDateIntoTimestamp(buoyData["#YY"], buoyData.MM, buoyData.DD, buoyData.hh, buoyData.mm),
+                    //     swellHeight: buoyData.SwH,
+                    //     swellPeriod: buoyData.SwP,
+                    //     swellDirection: buoyData.SwD,
+                    //     windWaveHeight: buoyData.WWH,
+                    //     windWavePeriod: buoyData.WWP,
+                    //     windWaveDirection: buoyData.WWD
+                    // }
+                    // return parsedBuoyData
+                    return [2 /*return*/, txtToJson({ data: response.data })];
+            }
+        });
     });
-}); });
-app.use("/weather", weatherRoute);
-app.use("/buoy", buoyRoute);
-var server = app.listen(port, function () {
-    console.log("Express listening on port " + port);
-});
-process.on("SIGINT", function () {
-    server.close(function () {
-        console.log("Server shutting down");
-        process.exit(0);
-    });
-});
-process.on("SIGTERM", function () {
-    server.close(function () {
-        console.log("Server shutting down");
-        process.exit(0);
-    });
-});
+}
+function parseDateIntoTimestamp(year, month, day, hour, minute) {
+    return ("".concat(year, "-").concat(month, "-").concat(day, "T").concat(hour, ":").concat(minute, "Z"));
+}

@@ -1,0 +1,1 @@
+declare module "txt-file-to-json"
