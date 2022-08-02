@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
 
 
 
-app.use("/graphql", graphqlHTTP({
+app.use("/graphql", cors() ,graphqlHTTP({
     schema,
     rootValue: root,
     graphiql: true,
