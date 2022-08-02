@@ -12,51 +12,54 @@ import { connectToMongo, disconnectFromMongo } from "./database.js"
 const app: Express = express()
 const port = 3003
 
-// app.use(cors({
-//         origin: ["*"],
-//         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//         credentials: true,
-//         allowedHeaders: [
-//             'X-App-Version',
-//             'Accept',
-//             'Accept-Version',
-//             'Content-Type',
-//             'Api-Version',
-//             'Origin',
-//             'X-Requested-With',
-//             'Authorization',
-//         ]
-//     }
-// ))
+
 app.use(express.json())
 app.use(cookieParser())
 
 const root = resolvers
 
 app.use(cors())
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   });
 
-  app.use("/graphql", function (req, res, next) {
+//   app.use("/graphql", function (req, res, next) {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+//     if (req.method === 'OPTIONS') {
+//       res.sendStatus(200);
+//     } else {
+//       next();
+//     }
+//   });
+
+
+
+// app.use("/graphql", graphqlHTTP({
+//     schema,
+//     rootValue: root,
+//     graphiql: true,
+// }))
+
+app.use('/graphql',(req,res,next)=>{
+
+    res.header('Access-Control-Allow-Credentials', "true");
+    res.header('Access-Control-Allow-Headers', 'content-type, authorization, content-length, x-requested-with, accept, origin');
+    res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    res.header('Allow', 'POST, GET, OPTIONS')
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     if (req.method === 'OPTIONS') {
       res.sendStatus(200);
     } else {
       next();
     }
-  });
-
-
-
-app.use("/graphql", graphqlHTTP({
+  }, graphqlHTTP({
     schema,
     rootValue: root,
-    graphiql: true,
-}))
+    graphiql: true
+  }));
 
 
 
