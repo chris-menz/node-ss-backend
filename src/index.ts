@@ -13,7 +13,7 @@ const app: Express = express()
 const port = 3003
 
 app.use(cors({
-        origin: ["https://ss-react-frontend.vercel.app/"]
+        origin: ["https://ss-react-frontend.vercel.app/", "https://ss-react-frontend.vercel.app"]
     }
 ))
 app.use(express.json())
