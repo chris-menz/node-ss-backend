@@ -209,7 +209,7 @@ export function parseBuoyData(buoyId: string, rawData: string): SpecBuoyData {
     const measurement = parseMeasurement(row, fieldOrderList);
 
     // If nothing went wrong with parsing, push it into the set
-    if (measurement) {
+    if (measurement && measurement.meanWaveDirection > -1) {
       data.measurements.push(measurement);
     }
   }
