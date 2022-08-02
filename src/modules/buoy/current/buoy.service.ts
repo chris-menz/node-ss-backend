@@ -1,25 +1,24 @@
-import axios from "axios"
-import txtToJson from "txt-file-to-json"
-import { BuoyData, ParsedBuoyData } from "./buoy.model.js"
+import axios, { AxiosResponse } from "axios"
+import { parseBuoyData } from "../buoy.specDataParser.js"
+import { SpecBuoyData, Measurement } from "../buoy.specModel.js"
 
 export async function getBuoyData(buoyId: string) {
-    const response = await axios.get(`https://www.ndbc.noaa.gov/data/realtime2/${buoyId}.spec`)
+    const specBuoyData: SpecBuoyData = await fetchAndParseSpecBuoyData(buoyId) 
 
-    // extract most current data from response array (0 index is table headers)
-    const buoyData: BuoyData = txtToJson({data: response.data})[1]
-
-    const parsedBuoyData: ParsedBuoyData = {
-        timestamp: parseDateIntoTimestamp(buoyData["#YY"], buoyData.MM, buoyData.DD, buoyData.hh, buoyData.mm),
-        swellHeight: buoyData.SwH,
-        swellPeriod: buoyData.SwP,
-        swellDirection: buoyData.SwD,
-        windWaveHeight: buoyData.WWH,
-        windWavePeriod: buoyData.WWP,
-        windWaveDirection: buoyData.WWD
+    if(!specBuoyData){
+        return null
     }
 
-    return parsedBuoyData
+    return specBuoyData
+}
 
+async function fetchAndParseSpecBuoyData(buoyId: string) {
+    const endpoint = `https://www.ndbc.noaa.gov/data/realtime2/${buoyId}.spec`
+
+    const response: AxiosResponse = await axios.get(endpoint)
+    const specBuoyData: SpecBuoyData = parseBuoyData(buoyId, response.data)
+
+    return specBuoyData
 }
 
 function parseDateIntoTimestamp(year: string, month: string, day: string, hour: string, minute: string){
