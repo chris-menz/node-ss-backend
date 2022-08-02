@@ -106,6 +106,9 @@ export default function Conditions(props: Props){
     useEffect(() => {
         if(buoyId && latlng){
             request(endpoint, getBuoyDataQuery).then(data => {
+                for(let i = 0; i < data.BuoyData.measurements.length; ++i){
+                    
+                }
                 setSpotConditions(data.BuoyData.measurements[0])
             })
             request(endpoint, getCurrentWeatherQuery).then(data => {
