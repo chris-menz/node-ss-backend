@@ -12,7 +12,10 @@ import { connectToMongo, disconnectFromMongo } from "./database.js"
 const app: Express = express()
 const port = 3003
 
-app.use(cors())
+app.use(cors({
+        origin: "https://ss-react-frontend.vercel.app/"
+    }
+))
 app.use(express.json())
 app.use(cookieParser())
 
