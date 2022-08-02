@@ -12,32 +12,36 @@ import { connectToMongo, disconnectFromMongo } from "./database.js"
 const app: Express = express()
 const port = 3003
 
-app.use(cors({
-        origin: ["*"],
-        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-        credentials: true,
-        allowedHeaders: [
-            'X-App-Version',
-            'Accept',
-            'Accept-Version',
-            'Content-Type',
-            'Api-Version',
-            'Origin',
-            'X-Requested-With',
-            'Authorization',
-        ]
-    }
-))
+// app.use(cors({
+//         origin: ["*"],
+//         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//         credentials: true,
+//         allowedHeaders: [
+//             'X-App-Version',
+//             'Accept',
+//             'Accept-Version',
+//             'Content-Type',
+//             'Api-Version',
+//             'Origin',
+//             'X-Requested-With',
+//             'Authorization',
+//         ]
+//     }
+// ))
 app.use(express.json())
 app.use(cookieParser())
 
 const root = resolvers
 
+app.use(cors())
+
 app.use("/graphql", graphqlHTTP({
     schema,
     rootValue: root,
-    graphiql: true
+    graphiql: true,
 }))
+
+app.use(cors())
 
 
 const server = app.listen(port, async () => {
