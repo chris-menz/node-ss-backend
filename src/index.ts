@@ -18,7 +18,7 @@ app.use(cookieParser())
 
 const root = resolvers
 
-app.use(cors())
+// app.use(cors())
 // app.use(function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -51,7 +51,7 @@ app.use('/graphql',(req,res,next)=>{
     res.header('Allow', 'POST, GET, OPTIONS')
     res.header('Access-Control-Allow-Origin', '*');
     if (req.method === 'OPTIONS') {
-      // res.sendStatus(200);
+      res.sendStatus(200);
       console.log("hi")
       res.header('Access-Control-Allow-Origin', '*');
     } else {
