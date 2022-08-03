@@ -51,7 +51,9 @@ app.use('/graphql',(req,res,next)=>{
     res.header('Allow', 'POST, GET, OPTIONS')
     res.header('Access-Control-Allow-Origin', '*');
     if (req.method === 'OPTIONS') {
-      res.sendStatus(200);
+      // res.sendStatus(200);
+      console.log("hi")
+      res.header('Access-Control-Allow-Origin', '*');
     } else {
       next();
     }
