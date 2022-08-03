@@ -18,7 +18,7 @@ app.use(cookieParser())
 
 const root = resolvers
 
-// app.use(cors())
+app.use(cors())
 // app.use(function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -37,31 +37,12 @@ const root = resolvers
 
 
 
-// app.use("/graphql", graphqlHTTP({
-//     schema,
-//     rootValue: root,
-//     graphiql: true,
-// }))
-
-app.use('/graphql',(req,res,next)=>{
-
-    res.header('Access-Control-Allow-Credentials', "true");
-    res.header('Access-Control-Allow-Headers', 'content-type, authorization, content-length, x-requested-with, accept, origin');
-    res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-    res.header('Allow', 'POST, GET, OPTIONS')
-    res.header('Access-Control-Allow-Origin', '*');
-    if (req.method === 'OPTIONS') {
-      res.sendStatus(200);
-      console.log("hi")
-      res.header('Access-Control-Allow-Origin', '*');
-    } else {
-      next();
-    }
-  }, graphqlHTTP({
+app.use("/graphql", graphqlHTTP({
     schema,
     rootValue: root,
-    graphiql: true
-  }));
+    graphiql: true,
+}))
+
 
 
 
